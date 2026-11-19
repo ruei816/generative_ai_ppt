@@ -1,0 +1,602 @@
+{
+  "title": "Object Detection Knowledge Graph",
+  "version": "1.1",
+  "language": "zh-TW",
+  "description": "依據五篇核心來源整理，補強 R-CNN 家族演進、評估指標鏈與 OBB 幾何關係；作為 20 頁教學簡報的知識導航。",
+  "nodes": [
+    {
+      "id": "task-detection",
+      "label": "物件偵測 Object Detection",
+      "type": "task",
+      "wiki": "wiki/basics/task-definition.md",
+      "sources": [
+        "raw/articles/01-ibm-what-is-object-detection.md"
+      ],
+      "summary": "同時辨識物件類別與空間位置。"
+    },
+    {
+      "id": "pipeline",
+      "label": "通用檢測管線",
+      "type": "concept",
+      "wiki": "wiki/basics/general-architecture.md",
+      "sources": [
+        "raw/articles/01-ibm-what-is-object-detection.md"
+      ],
+      "summary": "由特徵提取、特徵融合與預測組件構成。"
+    },
+    {
+      "id": "backbone",
+      "label": "Backbone 特徵提取",
+      "type": "module",
+      "wiki": "wiki/concepts/backbones/overview.md",
+      "sources": [
+        "raw/articles/01-ibm-what-is-object-detection.md"
+      ],
+      "summary": "從輸入影像提取多層次特徵。"
+    },
+    {
+      "id": "neck",
+      "label": "Neck 特徵融合",
+      "type": "module",
+      "wiki": "wiki/concepts/necks/overview.md",
+      "sources": [
+        "raw/articles/01-ibm-what-is-object-detection.md"
+      ],
+      "summary": "融合不同尺度的特徵資訊。"
+    },
+    {
+      "id": "head",
+      "label": "Head 檢測頭",
+      "type": "module",
+      "wiki": "wiki/concepts/heads/overview.md",
+      "sources": [
+        "raw/articles/01-ibm-what-is-object-detection.md"
+      ],
+      "summary": "輸出類別與邊界框等預測。"
+    },
+    {
+      "id": "two-stage",
+      "label": "Two-stage 檢測器",
+      "type": "model",
+      "wiki": "wiki/synthesis/two-stage-vs-one-stage.md",
+      "sources": [
+        "raw/articles/02-lilian-weng-rcnn-family.md",
+        "raw/papers/03-yolov1-cvpr2016.md"
+      ],
+      "summary": "先產生候選區域，再進行分類與定位。"
+    },
+    {
+      "id": "rcnn-family",
+      "label": "R-CNN 家族",
+      "type": "model",
+      "wiki": "wiki/models/rcnn-family.md",
+      "sources": [
+        "raw/articles/02-lilian-weng-rcnn-family.md"
+      ],
+      "summary": "包含 R-CNN、Fast R-CNN、Faster R-CNN、Mask R-CNN 等演進。"
+    },
+    {
+      "id": "rpn",
+      "label": "RPN 候選區域網絡",
+      "type": "module",
+      "wiki": "wiki/concepts/assignment/rpn.md",
+      "sources": [
+        "raw/articles/02-lilian-weng-rcnn-family.md"
+      ],
+      "summary": "由網路學習產生候選區域。"
+    },
+    {
+      "id": "roi-align",
+      "label": "RoI Pooling / RoIAlign",
+      "type": "module",
+      "wiki": "wiki/concepts/heads/roi-pooling-and-align.md",
+      "sources": [
+        "raw/articles/02-lilian-weng-rcnn-family.md"
+      ],
+      "summary": "對候選區域特徵進行採樣與對齊。"
+    },
+    {
+      "id": "one-stage",
+      "label": "One-stage 檢測器",
+      "type": "model",
+      "wiki": "wiki/synthesis/two-stage-vs-one-stage.md",
+      "sources": [
+        "raw/papers/03-yolov1-cvpr2016.md"
+      ],
+      "summary": "在單一架構中直接預測物件位置與類別。"
+    },
+    {
+      "id": "yolov1",
+      "label": "YOLOv1",
+      "type": "model",
+      "wiki": "wiki/models/yolov1.md",
+      "sources": [
+        "raw/papers/03-yolov1-cvpr2016.md"
+      ],
+      "summary": "將物件偵測重塑為單一迴歸問題。"
+    },
+    {
+      "id": "dense-head",
+      "label": "Dense Prediction Head",
+      "type": "module",
+      "wiki": "wiki/concepts/heads/dense-heads.md",
+      "sources": [
+        "raw/papers/03-yolov1-cvpr2016.md"
+      ],
+      "summary": "透過網格進行密集預測。"
+    },
+    {
+      "id": "iou",
+      "label": "IoU 交併比",
+      "type": "metric",
+      "wiki": "wiki/benchmarks/iou.md",
+      "sources": [
+        "raw/articles/04-roboflow-map-guide.md"
+      ],
+      "summary": "衡量預測框與真值框的重疊程度。"
+    },
+    {
+      "id": "map",
+      "label": "mAP 平均精度均值",
+      "type": "metric",
+      "wiki": "wiki/benchmarks/map.md",
+      "sources": [
+        "raw/articles/04-roboflow-map-guide.md"
+      ],
+      "summary": "彙整不同類別的平均精度。"
+    },
+    {
+      "id": "hbb",
+      "label": "HBB 水平邊界框",
+      "type": "concept",
+      "wiki": "wiki/synthesis/hbb-vs-obb.md",
+      "sources": [
+        "raw/articles/05-ultralytics-obb-guide.md"
+      ],
+      "summary": "以水平矩形框表示物件範圍。"
+    },
+    {
+      "id": "obb",
+      "label": "OBB 旋轉邊界框",
+      "type": "application",
+      "wiki": "wiki/applications/obb.md",
+      "sources": [
+        "raw/articles/05-ultralytics-obb-guide.md"
+      ],
+      "summary": "以具方向性的框貼合傾斜物件。"
+    },
+    {
+      "id": "rotated-nms",
+      "label": "Rotated NMS",
+      "type": "module",
+      "wiki": "wiki/concepts/postprocessing/rotated-nms.md",
+      "sources": [
+        "raw/articles/05-ultralytics-obb-guide.md"
+      ],
+      "summary": "依旋轉框重疊關係執行候選框抑制。"
+    },
+    {
+      "id": "nms",
+      "label": "NMS 非極大值抑制",
+      "type": "module",
+      "wiki": "wiki/concepts/postprocessing/nms.md",
+      "sources": [
+        "raw/articles/02-lilian-weng-rcnn-family.md",
+        "raw/articles/04-roboflow-map-guide.md"
+      ],
+      "summary": "移除重複預測框。"
+    },
+    {
+      "id": "dota",
+      "label": "DOTA 航拍資料集",
+      "type": "concept",
+      "wiki": "wiki/applications/obb.md",
+      "sources": [
+        "raw/articles/05-ultralytics-obb-guide.md"
+      ],
+      "summary": "用於航拍影像物件偵測研究的資料集。"
+    },
+    {
+      "id": "rcnn",
+      "label": "R-CNN",
+      "type": "model",
+      "wiki": "wiki/models/rcnn-family.md",
+      "sources": [
+        "raw/articles/02-lilian-weng-rcnn-family.md"
+      ],
+      "summary": "以候選區域逐一抽取特徵並分類的 Two-stage 偵測器。"
+    },
+    {
+      "id": "fast-rcnn",
+      "label": "Fast R-CNN",
+      "type": "model",
+      "wiki": "wiki/models/rcnn-family.md",
+      "sources": [
+        "raw/articles/02-lilian-weng-rcnn-family.md"
+      ],
+      "summary": "整張影像共享特徵圖，再透過 RoI Pooling 取得區域特徵。"
+    },
+    {
+      "id": "faster-rcnn",
+      "label": "Faster R-CNN",
+      "type": "model",
+      "wiki": "wiki/models/rcnn-family.md",
+      "sources": [
+        "raw/articles/02-lilian-weng-rcnn-family.md"
+      ],
+      "summary": "以 RPN 學習產生候選區域，與偵測網路共享特徵。"
+    },
+    {
+      "id": "mask-rcnn",
+      "label": "Mask R-CNN",
+      "type": "model",
+      "wiki": "wiki/models/rcnn-family.md",
+      "sources": [
+        "raw/articles/02-lilian-weng-rcnn-family.md"
+      ],
+      "summary": "在偵測分支外增加 Mask Branch，支援實例分割。"
+    },
+    {
+      "id": "selective-search",
+      "label": "Selective Search",
+      "type": "concept",
+      "wiki": "wiki/models/rcnn-family.md",
+      "sources": [
+        "raw/articles/02-lilian-weng-rcnn-family.md"
+      ],
+      "summary": "以傳統候選區域演算法提出可能含有物體的區域。"
+    },
+    {
+      "id": "roi-pooling",
+      "label": "RoI Pooling",
+      "type": "module",
+      "wiki": "wiki/concepts/heads/roi-pooling-and-align.md",
+      "sources": [
+        "raw/articles/02-lilian-weng-rcnn-family.md"
+      ],
+      "summary": "將候選區域映射到共享特徵圖並轉為固定尺寸。"
+    },
+    {
+      "id": "precision-recall",
+      "label": "Precision / Recall",
+      "type": "metric",
+      "wiki": "wiki/benchmarks/map.md",
+      "sources": [
+        "raw/articles/04-roboflow-map-guide.md"
+      ],
+      "summary": "分別衡量預測的正確比例與真實目標的找回比例。"
+    },
+    {
+      "id": "ap",
+      "label": "AP 平均精度",
+      "type": "metric",
+      "wiki": "wiki/benchmarks/map.md",
+      "sources": [
+        "raw/articles/04-roboflow-map-guide.md"
+      ],
+      "summary": "單一類別 Precision-Recall 曲線下的面積。"
+    },
+    {
+      "id": "tp-fp-fn",
+      "label": "TP / FP / FN",
+      "type": "concept",
+      "wiki": "wiki/benchmarks/iou.md",
+      "sources": [
+        "raw/articles/04-roboflow-map-guide.md"
+      ],
+      "summary": "在指定類別與 IoU 門檻下判斷命中、誤報與漏檢。"
+    },
+    {
+      "id": "rotated-iou",
+      "label": "Rotated IoU",
+      "type": "metric",
+      "wiki": "wiki/applications/obb.md",
+      "sources": [
+        "raw/articles/05-ultralytics-obb-guide.md"
+      ],
+      "summary": "計算旋轉矩形的交集與聯集比例。"
+    },
+    {
+      "id": "obb-format",
+      "label": "OBB 表示格式",
+      "type": "concept",
+      "wiki": "wiki/applications/obb.md",
+      "sources": [
+        "raw/articles/05-ultralytics-obb-guide.md"
+      ],
+      "summary": "以中心、寬高與角度或四頂點座標描述旋轉框。"
+    }
+  ],
+  "edges": [
+    {
+      "from": "task-detection",
+      "to": "pipeline",
+      "relation": "uses",
+      "label": "透過通用管線實作",
+      "sources": [
+        "raw/articles/01-ibm-what-is-object-detection.md"
+      ]
+    },
+    {
+      "from": "pipeline",
+      "to": "backbone",
+      "relation": "contains",
+      "label": "包含",
+      "sources": [
+        "raw/articles/01-ibm-what-is-object-detection.md"
+      ]
+    },
+    {
+      "from": "pipeline",
+      "to": "neck",
+      "relation": "contains",
+      "label": "包含",
+      "sources": [
+        "raw/articles/01-ibm-what-is-object-detection.md"
+      ]
+    },
+    {
+      "from": "pipeline",
+      "to": "head",
+      "relation": "contains",
+      "label": "包含",
+      "sources": [
+        "raw/articles/01-ibm-what-is-object-detection.md"
+      ]
+    },
+    {
+      "from": "two-stage",
+      "to": "rcnn-family",
+      "relation": "includes",
+      "label": "代表家族",
+      "sources": [
+        "raw/articles/02-lilian-weng-rcnn-family.md"
+      ]
+    },
+    {
+      "from": "rcnn-family",
+      "to": "rpn",
+      "relation": "uses",
+      "label": "Faster R-CNN 引入",
+      "sources": [
+        "raw/articles/02-lilian-weng-rcnn-family.md"
+      ]
+    },
+    {
+      "from": "rcnn-family",
+      "to": "roi-align",
+      "relation": "evolves_through",
+      "label": "RoI 特徵處理演進",
+      "sources": [
+        "raw/articles/02-lilian-weng-rcnn-family.md"
+      ]
+    },
+    {
+      "from": "one-stage",
+      "to": "yolov1",
+      "relation": "includes",
+      "label": "代表模型",
+      "sources": [
+        "raw/papers/03-yolov1-cvpr2016.md"
+      ]
+    },
+    {
+      "from": "yolov1",
+      "to": "dense-head",
+      "relation": "uses",
+      "label": "採用網格密集預測",
+      "sources": [
+        "raw/papers/03-yolov1-cvpr2016.md"
+      ]
+    },
+    {
+      "from": "two-stage",
+      "to": "one-stage",
+      "relation": "compared_with",
+      "label": "架構流派比較",
+      "sources": [
+        "raw/papers/03-yolov1-cvpr2016.md",
+        "raw/articles/02-lilian-weng-rcnn-family.md"
+      ]
+    },
+    {
+      "from": "task-detection",
+      "to": "iou",
+      "relation": "evaluated_by",
+      "label": "定位重疊度指標",
+      "sources": [
+        "raw/articles/04-roboflow-map-guide.md"
+      ]
+    },
+    {
+      "from": "task-detection",
+      "to": "map",
+      "relation": "evaluated_by",
+      "label": "整體精度指標",
+      "sources": [
+        "raw/articles/04-roboflow-map-guide.md"
+      ]
+    },
+    {
+      "from": "iou",
+      "to": "map",
+      "relation": "contributes_to",
+      "label": "IoU 門檻參與 AP 判定",
+      "sources": [
+        "raw/articles/04-roboflow-map-guide.md"
+      ]
+    },
+    {
+      "from": "hbb",
+      "to": "obb",
+      "relation": "evolves_to",
+      "label": "針對方向性物件的表示擴展",
+      "sources": [
+        "raw/articles/05-ultralytics-obb-guide.md"
+      ]
+    },
+    {
+      "from": "obb",
+      "to": "rotated-nms",
+      "relation": "requires",
+      "label": "搭配旋轉框重疊抑制",
+      "sources": [
+        "raw/articles/05-ultralytics-obb-guide.md"
+      ]
+    },
+    {
+      "from": "hbb",
+      "to": "nms",
+      "relation": "uses",
+      "label": "水平框後處理",
+      "sources": [
+        "raw/articles/02-lilian-weng-rcnn-family.md",
+        "raw/articles/04-roboflow-map-guide.md"
+      ]
+    },
+    {
+      "from": "obb",
+      "to": "dota",
+      "relation": "evaluated_on",
+      "label": "常見航拍評估資料集",
+      "sources": [
+        "raw/articles/05-ultralytics-obb-guide.md"
+      ]
+    },
+    {
+      "from": "rcnn-family",
+      "to": "rcnn",
+      "relation": "包含",
+      "label": "代表模型",
+      "sources": [
+        "raw/articles/02-lilian-weng-rcnn-family.md"
+      ]
+    },
+    {
+      "from": "rcnn",
+      "to": "selective-search",
+      "relation": "uses",
+      "label": "使用候選區域搜尋",
+      "sources": [
+        "raw/articles/02-lilian-weng-rcnn-family.md"
+      ]
+    },
+    {
+      "from": "rcnn",
+      "to": "fast-rcnn",
+      "relation": "evolves_to",
+      "label": "共享整張影像特徵",
+      "sources": [
+        "raw/articles/02-lilian-weng-rcnn-family.md"
+      ]
+    },
+    {
+      "from": "fast-rcnn",
+      "to": "roi-pooling",
+      "relation": "uses",
+      "label": "使用 RoI Pooling",
+      "sources": [
+        "raw/articles/02-lilian-weng-rcnn-family.md"
+      ]
+    },
+    {
+      "from": "fast-rcnn",
+      "to": "faster-rcnn",
+      "relation": "evolves_to",
+      "label": "以 RPN 取代外部候選區域生成",
+      "sources": [
+        "raw/articles/02-lilian-weng-rcnn-family.md"
+      ]
+    },
+    {
+      "from": "faster-rcnn",
+      "to": "rpn",
+      "relation": "uses",
+      "label": "使用 RPN",
+      "sources": [
+        "raw/articles/02-lilian-weng-rcnn-family.md"
+      ]
+    },
+    {
+      "from": "faster-rcnn",
+      "to": "mask-rcnn",
+      "relation": "evolves_to",
+      "label": "擴展為實例分割",
+      "sources": [
+        "raw/articles/02-lilian-weng-rcnn-family.md"
+      ]
+    },
+    {
+      "from": "mask-rcnn",
+      "to": "roi-align",
+      "relation": "uses",
+      "label": "使用 RoIAlign",
+      "sources": [
+        "raw/articles/02-lilian-weng-rcnn-family.md"
+      ]
+    },
+    {
+      "from": "task-detection",
+      "to": "tp-fp-fn",
+      "relation": "evaluated_by",
+      "label": "以 TP、FP、FN 分析結果",
+      "sources": [
+        "raw/articles/04-roboflow-map-guide.md"
+      ]
+    },
+    {
+      "from": "tp-fp-fn",
+      "to": "precision-recall",
+      "relation": "used_to_calculate",
+      "label": "計算 Precision 與 Recall",
+      "sources": [
+        "raw/articles/04-roboflow-map-guide.md"
+      ]
+    },
+    {
+      "from": "precision-recall",
+      "to": "ap",
+      "relation": "summarized_by",
+      "label": "形成 P-R 曲線並計算 AP",
+      "sources": [
+        "raw/articles/04-roboflow-map-guide.md"
+      ]
+    },
+    {
+      "from": "ap",
+      "to": "map",
+      "relation": "averaged_into",
+      "label": "跨類別平均為 mAP",
+      "sources": [
+        "raw/articles/04-roboflow-map-guide.md"
+      ]
+    },
+    {
+      "from": "obb",
+      "to": "obb-format",
+      "relation": "represented_by",
+      "label": "使用旋轉框格式",
+      "sources": [
+        "raw/articles/05-ultralytics-obb-guide.md"
+      ]
+    },
+    {
+      "from": "obb",
+      "to": "rotated-iou",
+      "relation": "evaluated_by",
+      "label": "使用 Rotated IoU",
+      "sources": [
+        "raw/articles/05-ultralytics-obb-guide.md"
+      ]
+    },
+    {
+      "from": "rotated-iou",
+      "to": "rotated-nms",
+      "relation": "used_by",
+      "label": "支援旋轉框去重",
+      "sources": [
+        "raw/articles/05-ultralytics-obb-guide.md"
+      ]
+    }
+  ]
+}

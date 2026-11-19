@@ -1,0 +1,31 @@
+flowchart TB
+  A[物件偵測<br/>分類 + 定位]
+  A --> B[Two-stage]
+  A --> C[One-stage]
+  subgraph TS[Two-stage 演進]
+    R[R-CNN] --> F[Fast R-CNN] --> FR[Faster R-CNN]
+    FR --> M[Mask R-CNN]
+    R --> SS[Selective Search]
+    F --> RP[RoI Pooling]
+    FR --> RPN[RPN]
+    M --> RA[RoIAlign + Mask Branch]
+  end
+  subgraph OS[One-stage 路線]
+    Y[YOLOv1] --> G[7 × 7 Grid]
+    G --> D[密集預測輸出]
+  end
+  B --> R
+  C --> Y
+  A --> I[IoU]
+  I --> T[TP / FP / FN]
+  T --> PR[Precision / Recall]
+  PR --> AP[AP] --> MAP[mAP]
+  I --> RI[Rotated IoU]
+  H[HBB] --> O[OBB]
+  O --> RI --> RN[Rotated NMS]
+  classDef task fill:#92AD94,color:#342528,stroke:#748B75
+  classDef model fill:#6D8795,color:#fff,stroke:#92AD94
+  classDef metric fill:#B58A70,color:#fff,stroke:#D6B89E
+  class A task
+  class B,C,R,F,FR,M,Y model
+  class I,T,PR,AP,MAP,RI,RN metric
