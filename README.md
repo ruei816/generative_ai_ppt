@@ -1,6 +1,3 @@
-# generative_ai_ppt
-物件偵測教學簡報
-
 # 物件偵測教學簡報：LLM Wiki × Workflow Graph
 
 本專案以 **Object Detection（物件偵測）** 為主題，透過 LLM Wiki 建立主題知識庫，並運用 Graph 規劃整體資料整理、內容設計與簡報製作流程，最後將整理完成的知識轉換成一份可互動瀏覽的 HTML 教學簡報。
@@ -171,23 +168,3 @@ index.html
 | HTML 檢查 | 檢查結構、JavaScript 語法與圖片路徑 |
 | 執行紀錄 | 使用 `log.md` 記錄專案過程 |
 
-## 九、專案反思
-
-在製作過程中，發現如果直接從資料蒐集進入簡報製作，容易出現內容深度不足、章節安排不合理、圖表與文字缺乏連結，以及版面呈現需要反覆修改等問題。
-
-因此，將整個製作流程拆分成四個階段，並透過 Workflow Graph 明確定義各工作節點、執行順序與檢查機制。
-
-另外，將檢查工作提前到 Wiki 整理完成後、簡報大綱確認後，以及 HTML 初版完成後，讓問題能在早期被發現，而不是等到最後交付時才進行修正。
-
-這次專案最大的收穫，是從單純生成簡報，轉變成先釐清需求、整理資料、規劃流程，再進行內容設計與製作，讓整體工作更有系統性，也更容易追蹤與修正。
-
----
-
-## 十、專案資訊
-
-- **Project:** Object Detection Teaching Presentation
-- **Topic:** Computer Vision / Object Detection
-- **Knowledge Base:** LLM Wiki
-- **Workflow Planning:** Workflow Graph
-- **Presentation:** HTML
-- **Repository:** https://github.com/ruei816/generative_ai_ppt
